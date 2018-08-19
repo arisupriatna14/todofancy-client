@@ -28,7 +28,7 @@ Vue.component('form-signup', {
     signup: function() {
       axios({
         method: 'POST',
-        url: 'http://localhost:3030/api/signup',
+        url: 'http://todofancy-api.arisupriatna.com/api/signup',
         data: {
           fullname: this.fullname,
           email: this.email,

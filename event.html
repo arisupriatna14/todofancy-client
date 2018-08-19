@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <title>E-Commerce - Ari Supriatna</title>
+  <title>Todo-Fancy - Ari Supriatna</title>
   <style>
     .space {
       margin-left: 10px;
@@ -36,22 +36,7 @@
   <div id="app">
     <navbar-home></navbar-home>
     <div class="container" style="margin-top: 80px">
-      <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-12" v-for="event in events">
-          <div class="card">
-            <img :src="event.imgUrl" alt="" class="img-fluid">
-            <div class="card-body">
-              <p>{{ event.title }}</p>
-              <span class="text-muted">{{ event.dateConvert }} - {{ new Date(event.due_date).toLocaleDateString() }}</span><br>
-            </div>
-            <div class="card-footer">
-              <button @click="addTodo(event.title, event.due_date)" class="btn btn-primary btn-sm">Add Todo</button>
-              <button @click="descriptions(event.title, event.description, event.imgUrl)" class="btn btn-primary btn-sm">Description</button>
-            </div>
-            <br>
-          </div>
-        </div>
-      </div>
+      <list-event></list-event>
     </div>
     <br>
     <footer-home></footer-home>
@@ -59,6 +44,7 @@
 
   <script src="./components/navbar-home.js"></script>
   <script src="./components/footer.js"></script>
+  <script src="./components/list-event.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -68,97 +54,6 @@
   <script>
     new Vue({
       el: '#app',
-      data: {
-        username: '',
-        todos: [],
-        statusTodo: '',
-        events: []
-      },
-      methods: {
-        getUser: function () {
-          const token = localStorage.getItem('token')
-          axios({
-            method: 'POST',
-            url: 'http://localhost:3030/api/getUsername',
-            data: {
-              token: token
-            }
-          })
-            .then(result => {
-              this.username = result.data.username
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        },
-
-        getAllEvent: function () {
-          axios({
-            method: 'GET',
-            url: 'http://localhost:3030/api/todo/events',
-          })
-            .then(result => {
-              result.data.data.events.forEach(event => {
-                if (event.logo) {
-                  this.events.push({
-                    title: event.name.text,
-                    date: event.start.utc,
-                    dateConvert: new Date(event.start.utc).toLocaleDateString(),
-                    due_date: event.end.utc,
-                    imgUrl: event.logo.original.url,
-                    description: event.description.text
-                  })
-                } else {
-                  this.events.push({
-                    title: event.name.text,
-                    date: event.start.utc,
-                  })
-                }
-
-              })
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        },
-        addTodo: function (title, due_date) {
-          console.log('ini title =====>', title)
-          console.log('ini duedate =====>', due_date)
-          axios({
-            method: 'POST',
-            url: 'http://localhost:3030/api/todo/add',
-            data: {
-              title: title,
-              due_date: due_date,
-              category: 'Event'
-            },
-            headers: {
-              token: localStorage.getItem('token')
-            }
-          })
-            .then(result => {
-              swal('Add todo success', '', 'success')
-              setTimeout(() => {
-                window.location = 'http://localhost:8080/index.html'
-              }, 2000)
-            })
-            .catch(err => {
-              swal('Add todo failed', 'Try again!', 'error')
-            })
-        },
-        descriptions: function (title, description, image) {
-          swal({
-            title: title,
-            text: description,
-            icon: image,
-            imageAlt: 'Custom image',
-          })
-        }
-      },
-      mounted() {
-        this.getUser()
-        this.getAllEvent()
-      },
     })
   </script>
 

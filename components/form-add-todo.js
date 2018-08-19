@@ -37,7 +37,7 @@ Vue.component('form-todo', {
     addTodo: function() {
       axios({
         method: 'POST',
-        url: 'http://localhost:3030/api/todo/add',
+        url: 'http://todofancy-api.arisupriatna.com/api/todo/add',
         data: {
           title: this.title,
           due_date: this.due_date,

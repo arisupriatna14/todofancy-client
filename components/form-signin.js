@@ -22,7 +22,7 @@ Vue.component("form-signin", {
     signin: function() {
       axios({
         method: "POST",
-        url: "http://localhost:3030/api/signin",
+        url: "http://todofancy-api.arisupriatna.com/api/signin",
         data: {
           email: this.email,
           password: this.password

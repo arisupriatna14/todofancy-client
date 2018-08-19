@@ -39,14 +39,14 @@ Vue.component('todo-list', {
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form>
+                      <form v-on:submit.prevent>
                         <div class="form-group">
                           <label>Title</label>
                           <input type="text" class="form-control" v-model="dataUpdate.title" ref="title">
                         </div>
                         <div class="form-group">
                           <label>Due Date</label>
-                          <input type="date" class="form-control"  v-model="due_date">
+                          <input type="text" class="form-control"  v-model="dataUpdate.due_date">
                         </div>
                         <div class="form-group">
                           <label>Category</label>
@@ -90,7 +90,7 @@ Vue.component('todo-list', {
     todoList: function () {
       axios({
         method: 'GET',
-        url: 'http://localhost:3030/api/todo/mytodolist',
+        url: 'http://todofancy-api.arisupriatna.com/api/todo/mytodolist',
         headers: {
           token: localStorage.getItem('token')
         }
@@ -114,7 +114,7 @@ Vue.component('todo-list', {
     dataUpdateTodolist: function(id) {
       axios({
         method: 'GET',
-        url: `http://localhost:3030/api/todo/mytodolist/${id}`
+        url: `http://todofancy-api.arisupriatna.com/api/todo/mytodolist/${id}`
       })
         .then(result => {
           this.dataUpdate = {
@@ -131,18 +131,22 @@ Vue.component('todo-list', {
     },
 
     updateTodo: function(id) {
+      // event.preventDefault()
       axios({
         method: 'PUT',
-        url: `http://localhost:3030/api/todo/mytodolist/${id}`,
+        url: `http://todofancy-api.arisupriatna.com/api/todo/mytodolist/${id}`,
         data: {
           title: this.dataUpdate.title,
-          due_date: this.due_date,
+          due_date: this.dataUpdate.due_date,
           status: this.dataUpdate.status,
           category: this.dataUpdate.category
         }
       })
         .then(() => {
           swal('Update todo success', '', 'success')
+          setTimeout(() => {
+            window.location = 'http://localhost:8080/index.html'
+          }, 2000)
         })
         .catch(err => {
           swal('Update failed', 'Try again!', 'error')
@@ -152,7 +156,7 @@ Vue.component('todo-list', {
     deleteTodo: function(id) {
       axios({
         method: 'DELETE',
-        url: `http://localhost:3030/api/todo/mytodolist/${id}`
+        url: `http://todofancy-api.arisupriatna.com/api/todo/mytodolist/${id}`
       })
         .then(() => {
           swal('Delete todo success', '', 'success')
