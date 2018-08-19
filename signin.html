@@ -49,7 +49,7 @@
           axios.post('http://todofancy-api.arisupriatna.com/api/signin/facebook', response.authResponse)
             .then(result => {
               localStorage.setItem('token', result.data.token)
-              window.location = 'http://localhost:8080/index.html'
+              window.location = 'http://todofancy.arisupriatna.com/index.html'
             })
             .catch(err => {
               console.log(err)
@@ -61,7 +61,7 @@
 
     const token = localStorage.getItem('token')
     if (token) {
-      window.location = 'http://localhost:8080/index.html'
+      window.location = 'http://todofancy.arisupriatna.com/index.html'
     }
 
   </script>

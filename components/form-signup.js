@@ -18,7 +18,7 @@ Vue.component('form-signup', {
   `,
   data: function() {
     return {
-      urlFormSignin: 'http://localhost:8080/signin.html',
+      urlFormSignin: 'http://todofancy.arisupriatna.com/signin.html',
       fullname: '',
       email: '',
       password: ''
@@ -39,7 +39,7 @@ Vue.component('form-signup', {
           localStorage.setItem("token", result.data.token);
           swal('Signup Success', '', 'success');
           setTimeout(() => {
-            window.location = "http://localhost:8080/index.html";
+            window.location = "http://todofancy.arisupriatna.com/index.html";
           }, 2000);
         })
         .catch(err => {

@@ -70,7 +70,7 @@ Vue.component("list-event", {
         .then(result => {
           swal("Add todo success", "", "success");
           setTimeout(() => {
-            window.location = "http://localhost:8080/index.html";
+            window.location = "http://todofancy.arisupriatna.com/index.html";
           }, 2000);
         })
         .catch(err => {

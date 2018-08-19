@@ -145,7 +145,7 @@ Vue.component('todo-list', {
         .then(() => {
           swal('Update todo success', '', 'success')
           setTimeout(() => {
-            window.location = 'http://localhost:8080/index.html'
+            window.location = 'http://todofancy.arisupriatna.com/index.html'
           }, 2000)
         })
         .catch(err => {
@@ -161,7 +161,7 @@ Vue.component('todo-list', {
         .then(() => {
           swal('Delete todo success', '', 'success')
           setTimeout(() => {
-            window.location = 'http://localhost:8080/index.html'
+            window.location = 'http://todofancy.arisupriatna.com/index.html'
           }, 2000)
         })
         .catch(err => {

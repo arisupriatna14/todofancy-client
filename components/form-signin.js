@@ -32,7 +32,7 @@ Vue.component("form-signin", {
           localStorage.setItem("token", result.data.token);
           swal('Signin Success', '', 'success');
           setTimeout(() => {
-            window.location = "http://localhost:8080/index.html";
+            window.location = "http://todofancy.arisupriatna.com/index.html";
           }, 2000);
         })
         .catch(err => {

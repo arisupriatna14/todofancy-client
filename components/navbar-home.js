@@ -25,7 +25,7 @@ Vue.component('navbar-home', {
   },
   methods: {
     formSignup: function() {
-      window.location = 'http://localhost:8080/signup.html'
+      window.location = 'http://todofancy.arisupriatna.com/signup.html'
     },
 
     checkLogin: function() {
@@ -39,12 +39,12 @@ Vue.component('navbar-home', {
       localStorage.removeItem('token')
       swal('Sign out success', '', 'success')
       setTimeout(() => {
-        window.location = 'http://localhost:8080/signin.html'
+        window.location = 'http://todofancy.arisupriatna.com/signin.html'
       }, 2000)
     },
 
     event: function() {
-      window.location = 'http://localhost:8080/event.html'
+      window.location = 'http://todofancy.arisupriatna.com/event.html'
     }
   },
   mounted() {
